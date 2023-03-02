@@ -15,7 +15,7 @@ To launch in RViz
 ```
 roslaunch car_robot rviz.launch
 ```
-To luanch in Gazebo
+To launch in Gazebo
 ```
 roslaunch car_robot gazebo.launch
 ```
