@@ -1,0 +1,9 @@
+<?xml version='1.0'?>
+<robot xmlns:xacro ="http://www.ros.org/wiki/xacro" name="car-robot" >
+	<xacro:include filename="$(find car_robot)/urdf/car-robot-params.xacro" />
+	<xacro:include filename="$(find car_robot)/urdf/car-robot-inertia.xacro" />
+	<xacro:include filename="$(find car_robot)/urdf/car-robot-chassis.xacro" />
+	<xacro:include filename="$(find car_robot)/urdf/car-robot-wheel.xacro" />
+	<xacro:include filename="$(find car_robot)/urdf/car-robot-gazebo.xacro" />
+	
+</robot>

@@ -1,0 +1,17 @@
+<?xml version='1.0'?>
+<robot xmlns:xacro ="http://www.ros.org/wiki/xacro" name="car-robot-gazebo" >
+	<gazebo reference="chassis-link">
+		<material>Gazebo/DarkGrey</material>
+	</gazebo>
+	
+	<xacro:macro name="color_wheel" params="x_position y_position">
+		<gazebo reference="${x_position}-${y_position}-wheel-link">
+			<material>Gazebo/Purple</material>
+		</gazebo>
+	</xacro:macro>
+	
+	<xacro:color_wheel x_position="front" y_position="right"/>
+	<xacro:color_wheel x_position="front" y_position="left" />
+	<xacro:color_wheel x_position="rare" y_position="right" />
+	<xacro:color_wheel x_position="rare" y_position="left"  />
+</robot>	

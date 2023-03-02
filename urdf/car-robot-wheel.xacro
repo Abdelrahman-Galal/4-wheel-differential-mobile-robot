@@ -1,0 +1,42 @@
+<?xml version='1.0'?>
+<robot xmlns:xacro ="http://www.ros.org/wiki/xacro" name="car_robot_wheel">
+	
+	<material name="blue">
+		<color rgba="0 0.4 0.5 1"/>
+	</material>
+	
+	<xacro:macro name="wheel" params="x_position y_position x_reflect y_reflect">
+	<!-- ${x_position}-${y_position}-wheel-link -->
+		<link name="${x_position}-${y_position}-wheel-link">
+			<visual>
+				<origin xyz="0 0 0" rpy="${pi * 0.5} 0 0" />
+				<geometry>
+					<cylinder radius ="${wheel_radius}"  length="${wheel_height}" />
+				</geometry>
+				<material name="blue" />
+			</visual>
+			<collision>
+				<origin xyz="0 0 0" rpy="${pi * 0.5} 0 0" />
+				<geometry>
+					<cylinder radius ="${wheel_radius}"  length="${wheel_height}" />
+				</geometry>
+			</collision>
+			<inertial>
+				<origin xyz="0 0 0" rpy="${pi * 0.5} 0 0" />
+				<mass value="${wheel_mass}" />
+				<xacro:cylinder_inertia  mass="${wheel_mass}" R="${wheel_radius}" H="${wheel_height}" />
+			</inertial>
+		</link>
+		<joint name="joint-chassis-${x_position}-${y_position}-wheel" type="continuous">
+			<parent link="chassis-link"/>
+			<child link="${x_position}-${y_position}-wheel-link"/>
+			<origin xyz="${x_reflect*0.3*chassis_length} ${y_reflect*(chassis_width/2+wheel_height/2)} 0" rpy="0 0 0" />
+			<axis xyz="0 1 0" />
+		</joint>
+	</xacro:macro>
+	
+	<xacro:wheel x_position="front" y_position="right" x_reflect="1" y_reflect="1" />
+	<xacro:wheel x_position="front" y_position="left" x_reflect="1" y_reflect="-1" />
+	<xacro:wheel x_position="rare" y_position="right" x_reflect="-1" y_reflect="1" />
+	<xacro:wheel x_position="rare" y_position="left" x_reflect="-1" y_reflect="-1" />
+</robot>

@@ -1,0 +1,14 @@
+<?xml version='1.0'?>
+<robot xmlns:xacro ="http://www.ros.org/wiki/xacro" name="car_robot_inertia">
+	
+	<xacro:macro name="box_inertia" params="mass L W H">
+		<inertia ixx="${1/12 * mass * (L**2 + W**2 )}" iyy="${1/12 * mass * (H**2 + W**2 )}" izz="${1/12 * mass * (L**2 + H**2 )}"
+		ixy="0" ixz="0" iyz="0"/>
+	</xacro:macro>
+	
+	<xacro:macro name="cylinder_inertia" params="mass R H">
+		<inertia ixx="${1/12 * mass * (3 * R**2 + H**2 )}" iyy="${1/12 * mass * (3 * R**2 + H**2 )}" izz="${0.5 * (mass * R**2 )}"
+		ixy="0" ixz="0" iyz="0"/>
+	</xacro:macro>
+	
+</robot>
