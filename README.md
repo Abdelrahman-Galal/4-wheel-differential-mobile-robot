@@ -9,7 +9,7 @@ The repository includes a URDF/Xacro description of a 4-wheel differential mobil
 To install the package 
 
 ```
-catkin build arduino_communication_server
+catkin build car_robot
 ```
 To launch in RViz
 ```
