@@ -11,7 +11,7 @@
     <visual>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <box size="0.2 0.12 0.01"/>
+        <box size="0.14 0.12 0.01"/>
       </geometry>
       <material name="brown">
         <color rgba="0.3 0 0.4 1"/>
@@ -20,7 +20,7 @@
     <collision>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <box size="0.2 0.12 0.01"/>
+        <box size="0.14 0.12 0.01"/>
       </geometry>
     </collision>
     <inertial>
@@ -60,7 +60,7 @@
   <joint name="joint-chassis-front-right-wheel" type="continuous">
     <parent link="chassis-link"/>
     <child link="front-right-wheel-link"/>
-    <origin rpy="0 0 0" xyz="0.06 0.065 0"/>
+    <origin rpy="0 0 0" xyz="0.042 0.065 0"/>
     <axis xyz="0 1 0"/>
   </joint>
   <!-- ${x_position}-${y_position}-wheel-link -->
@@ -87,7 +87,7 @@
   <joint name="joint-chassis-front-left-wheel" type="continuous">
     <parent link="chassis-link"/>
     <child link="front-left-wheel-link"/>
-    <origin rpy="0 0 0" xyz="0.06 -0.065 0"/>
+    <origin rpy="0 0 0" xyz="0.042 -0.065 0"/>
     <axis xyz="0 1 0"/>
   </joint>
   <!-- ${x_position}-${y_position}-wheel-link -->
@@ -114,7 +114,7 @@
   <joint name="joint-chassis-rare-right-wheel" type="continuous">
     <parent link="chassis-link"/>
     <child link="rare-right-wheel-link"/>
-    <origin rpy="0 0 0" xyz="-0.06 0.065 0"/>
+    <origin rpy="0 0 0" xyz="-0.042 0.065 0"/>
     <axis xyz="0 1 0"/>
   </joint>
   <!-- ${x_position}-${y_position}-wheel-link -->
@@ -141,22 +141,49 @@
   <joint name="joint-chassis-rare-left-wheel" type="continuous">
     <parent link="chassis-link"/>
     <child link="rare-left-wheel-link"/>
-    <origin rpy="0 0 0" xyz="-0.06 -0.065 0"/>
+    <origin rpy="0 0 0" xyz="-0.042 -0.065 0"/>
     <axis xyz="0 1 0"/>
   </joint>
   <gazebo reference="chassis-link">
     <material>Gazebo/DarkGrey</material>
   </gazebo>
+  <gazebo>
+    <!-- differential drive control for Gazebo -->
+    <plugin filename="libgazebo_ros_diff_drive.so" name="differential_drive_controller">
+      <alwaysOn>true</alwaysOn>
+      <updateRate>100</updateRate>
+      <leftJoint>joint-chassis-rare-left-wheel</leftJoint>
+      <rightJoint>joint-chassis-rare-right-wheel</rightJoint>
+      <wheelSeparation>0.12</wheelSeparation>
+      <wheelDiameter>0.04</wheelDiameter>
+      <torque>0.1</torque>
+      <commandTopic>cmd_vel</commandTopic>
+      <odometryTopic>odom</odometryTopic>
+      <odometryFrame>odom</odometryFrame>
+      <robotBaseFrame>base_link</robotBaseFrame>
+      <publishWheelTF>true</publishWheelTF>
+      <publishOdom>true</publishOdom>
+      <publishWheelJointState>true</publishWheelJointState>
+    </plugin>
+  </gazebo>
   <gazebo reference="front-right-wheel-link">
+    <mu1>10000.0 </mu1>
+    <mu2>10000.0 </mu2>
     <material>Gazebo/Purple</material>
   </gazebo>
   <gazebo reference="front-left-wheel-link">
+    <mu1>10000.0 </mu1>
+    <mu2>10000.0 </mu2>
     <material>Gazebo/Purple</material>
   </gazebo>
   <gazebo reference="rare-right-wheel-link">
+    <mu1>10000.0 </mu1>
+    <mu2>10000.0 </mu2>
     <material>Gazebo/Purple</material>
   </gazebo>
   <gazebo reference="rare-left-wheel-link">
+    <mu1>10000.0 </mu1>
+    <mu2>10000.0 </mu2>
     <material>Gazebo/Purple</material>
   </gazebo>
 </robot>

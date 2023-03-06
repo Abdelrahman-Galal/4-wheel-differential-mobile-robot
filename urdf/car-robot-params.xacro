@@ -1,6 +1,6 @@
 <?xml version='1.0'?>
 <robot xmlns:xacro ="http://www.ros.org/wiki/xacro" >
-	<xacro:property name="chassis_length" value="0.2" />
+	<xacro:property name="chassis_length" value="0.14" />
 	<xacro:property name="chassis_width" value="0.12" />
 	<xacro:property name="chassis_height" value="0.01" />
 	<xacro:property name="chassis_mass" value="0.4" />

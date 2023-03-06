@@ -1,14 +1,37 @@
 <?xml version='1.0'?>
 <robot xmlns:xacro ="http://www.ros.org/wiki/xacro" name="car-robot-gazebo" >
+	
 	<gazebo reference="chassis-link">
 		<material>Gazebo/DarkGrey</material>
 	</gazebo>
 	
 	<xacro:macro name="color_wheel" params="x_position y_position">
 		<gazebo reference="${x_position}-${y_position}-wheel-link">
+		        <mu1>10000.0 </mu1>
+                        <mu2>10000.0 </mu2>
 			<material>Gazebo/Purple</material>
 		</gazebo>
 	</xacro:macro>
+	
+	<gazebo>
+	<!-- differential drive control for Gazebo -->
+	<plugin name="differential_drive_controller" filename="libgazebo_ros_diff_drive.so">
+	<alwaysOn>true</alwaysOn>
+	<updateRate>100</updateRate>
+	<leftJoint>joint-chassis-rare-left-wheel</leftJoint>
+	<rightJoint>joint-chassis-rare-right-wheel</rightJoint>
+	<wheelSeparation>${chassis_width}</wheelSeparation>
+	<wheelDiameter>${2 * wheel_radius}</wheelDiameter>
+	<torque>0.1</torque>
+	<commandTopic>cmd_vel</commandTopic>
+	<odometryTopic>odom</odometryTopic>
+	<odometryFrame>odom</odometryFrame>
+	<robotBaseFrame>base_link</robotBaseFrame>
+	<publishWheelTF>true</publishWheelTF>
+	<publishOdom>true</publishOdom>
+	<publishWheelJointState>true</publishWheelJointState>
+	</plugin>
+	</gazebo>
 	
 	<xacro:color_wheel x_position="front" y_position="right"/>
 	<xacro:color_wheel x_position="front" y_position="left" />
